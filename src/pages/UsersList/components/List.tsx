@@ -3,18 +3,18 @@ import { UserDTO } from 'types';
 import ListItem from './ListItem';
 
 type PropsType = {
-  users: UserDTO[];
+  users?: UserDTO[];
 };
 
 const OL = styled.ol`
   color: ${({ theme }) => theme.colors.grey};
 `;
 
-const List = ({ users }: PropsType) => {
+const List = ({ users = [] }: PropsType) => {
   return (
     <OL>
       {users.map((user) => (
-        <ListItem name={user.name} username={user.username} />
+        <ListItem key={user.id} name={user.name} username={user.username} />
       ))}
     </OL>
   );
