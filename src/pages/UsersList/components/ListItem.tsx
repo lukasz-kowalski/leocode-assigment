@@ -6,6 +6,8 @@ type PropsType = {
 };
 
 const Item = styled.li`
+  grid-column: 2 / span 1;
+  margin-left: 3.6rem;
   margin-bottom: 1.6rem;
 `;
 

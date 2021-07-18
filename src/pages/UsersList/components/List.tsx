@@ -7,6 +7,9 @@ type PropsType = {
 };
 
 const OL = styled.ol`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   color: ${({ theme }) => theme.colors.grey};
 `;
 

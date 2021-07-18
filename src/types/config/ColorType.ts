@@ -1,5 +1,5 @@
 export enum ColorType {
   black = '#333',
-  darkGrey = '#aaa',
+  darkGrey = '#888',
   grey = '#ccc',
 }

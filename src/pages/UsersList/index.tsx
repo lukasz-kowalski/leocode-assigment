@@ -1,9 +1,9 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import debounce from 'lodash.debounce';
 import { useFetch } from 'services';
 import { UsersListUrls } from 'config/url';
 import { UsersListResponse, UserDTO } from 'types';
+import { useDebounce } from 'lib/hooks';
 import { filterUsers } from 'lib/pages';
 import { Heading, List, Search } from './components';
 
@@ -13,24 +13,17 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const timer = 300;
-
 const UsersList = () => {
   const { isLoading, error, data } = useFetch<UsersListResponse>(UsersListUrls.USERS_LIST, []);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState<UserDTO[]>([]);
 
-  const debouncedFilteredUsersUpdater = useMemo(
-    () => debounce((value: UserDTO[]) => setFilteredUsers(value), timer),
-    []
-  );
+  const updateFilteredUsers = (users: UserDTO[]) => setFilteredUsers(users);
+
+  const debouncedFilteredUsersUpdater = useDebounce(updateFilteredUsers);
 
   useEffect(() => {
     debouncedFilteredUsersUpdater(filterUsers(searchQuery, data));
-
-    return () => {
-      debouncedFilteredUsersUpdater.cancel();
-    };
   }, [debouncedFilteredUsersUpdater, data, searchQuery]);
 
   const handleSearchChange = (query: string) => {

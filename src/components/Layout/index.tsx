@@ -10,7 +10,7 @@ const Wrapper = styled.main`
   margin: 1.6rem auto 0 auto;
 
   @media only screen and (min-width: ${Breakpoints.DESKTOP}) {
-    width: 1025px;
+    width: ${Breakpoints.DESKTOP};
     margin-top: 6rem;
   }
 `;

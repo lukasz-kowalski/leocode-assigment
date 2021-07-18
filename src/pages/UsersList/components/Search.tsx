@@ -7,13 +7,16 @@ type PropsType = {
 };
 
 const Container = styled.div`
+  width: 30rem;
   margin: 4rem 0;
 `;
+
+const placeholder = 'Search by user name...';
 
 const Search = ({ searchQuery, onChange }: PropsType) => {
   return (
     <Container>
-      <TextInput value={searchQuery} onChange={onChange} />
+      <TextInput value={searchQuery} onChange={onChange} placeholder={placeholder} />
     </Container>
   );
 };

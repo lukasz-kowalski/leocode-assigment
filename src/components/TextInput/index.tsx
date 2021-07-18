@@ -1,14 +1,20 @@
 import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
-type PropsType = {
+export type PropsType = {
   value: string;
   onChange: (value: string) => void;
+  disabled?: boolean;
+  placeholder?: string;
 };
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 0.8rem;
+  outline-color: ${({ theme }) => theme.colors.darkGrey};
+`;
 
-const TextInput = ({ value, onChange }: PropsType) => {
+const TextInput = ({ value, onChange, placeholder, disabled }: PropsType) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
@@ -16,6 +22,8 @@ const TextInput = ({ value, onChange }: PropsType) => {
   const props = {
     value,
     onChange: handleChange,
+    placeholder,
+    disabled,
   };
 
   return <StyledInput {...props} />;
